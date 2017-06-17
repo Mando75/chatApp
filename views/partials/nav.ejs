@@ -1,25 +1,29 @@
-
 <nav class="teal">
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo"><%= title %></a>
+        <a href="#!" class="brand-logo center title"><%= title %></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down">
             <a href="#" data-activates="mobile-demo" class="menu"><i class="material-icons right">menu</i>Menu</a>
         </ul>
         <ul class="side-nav" id="mobile-demo">
+            <% if(typeof email != 'undefined' ) { %>
             <li><div class="userView">
                     <div class="background">
-                        <!--<img src="images/office.jpg">-->
+                        <img src="https://static.pexels.com/photos/6675/flight-mountains-sky-flying.jpeg">
                     </div>
-                    <!--<a href="#!user"><img class="circle" src="images/yuna.jpg"></a>-->
-                    <a href="#!name"><span class="white-text name">John Doe</span></a>
-                    <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                    <a href="#!user"><i class="material-icons">account_circle</i></a>
+                    <a href="#!name"><span class="secondary-text-color name"><%= typeof name !='undefined' ? name : 'not logged in' %></span></a>
+                    <a href="#!email"><span class="secondary-text-color email"><%= typeof email !='undefined' ? email : 'not logged in' %></span></a>
                 </div></li>
             <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
             <li><a href="#!">Second Link</a></li>
             <li><div class="divider"></div></li>
             <li><a class="subheader">Subheader</a></li>
             <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+            <li><a class="waves-effect" href="/logout">Logout</a></li>
+            <%} else { %>
+            <li class="secondary-text-color"><a role="button" class="btn btn-small waves-effect accent-color" href="/login">Please Login</a></li>
+            <% } %>
         </ul>
     </div>
 </nav>

@@ -3,8 +3,64 @@
   <% include partials/head.ejs %>
   <body>
     <% include partials/nav.ejs %>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br><br>
+        <h1 class="header center primary-text-color">Welcome to Material Chat</h1>
+        <div class="row center">
+          <h4 class="header col s12 light secondary-text-color">A new way to connect with your friends</h4>
+        </div>
+        <div class="row center">
+          <h5 class="header light secondary-text-color">Create an account today!</h5>
+          <a href="/login/createAccount" id="download-button" class="btn-large waves-effect waves-light purple">Get Started</a>
+        </div>
+        <br><br>
 
+      </div>
+    </div>
+    <div class="container">
+      <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+              <h5 class="center">Fast and Easy</h5>
+
+              <p class="light">Material Chat provides a minimalist chat service that lets you and your friends stay connected on the go.
+                With easy account creation and management, you'll be up and chatting in minutes. Our chat services are simple and secure. No learning curve here!</p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+              <h5 class="center">Connect With Each Other</h5>
+
+              <p class="light">It's easy and intuitive to track your friends on Material Chat. Find someone you want to connect with later?
+                Adding them to your friends takes the click of a button. It's also easy to invite your friends to join the service; all you need is their email.
+                </p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center light-blue-text"><i class="material-icons">history</i></h2>
+              <h5 class="center">Save Your Chats</h5>
+
+              <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non malesuada justo. Quisque tincidunt leo vel placerat venenatis. Morbi eget nibh orci. Integer faucibus justo id diam egestas, quis elementum justo malesuada.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <br><br>
+
+      <div class="section">
+
+      </div>
+    </div>
+    <% include partials/footer.ejs %>
   </body>
 </html>
