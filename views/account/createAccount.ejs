@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<% include ../partials/head.ejs %>
+<body>
+<% include ../partials/nav.ejs %>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card large">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h4>Welcome to Material Chat!</h4>
+                        <h5>Please enter the following information to get started:</h5>
+                    </div>
+                </div>
+                <div class="row" id="createForm">
+                    <form class="col s12" method="post" action="/account/createAccount">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="username" name="username" type="text" class="validate">
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="email" name="email" type="email" class="validate">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="password" type="password" class="validate" name="password">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="confirmPwd" type="password" class="validate" name="confirmPwd">
+                                <label for="confirmPwd">Confirm Password</label>
+                            </div>
+                        </div>
+                        <div class="row center">
+                            <div class="col s12">
+                                <button type="submit" class="btn-large waves-effect waves-light purple">Create Account</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>
+</body>
+</html>

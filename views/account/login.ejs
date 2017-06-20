@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<% include partials/head.ejs %>
+<% include ../partials/head.ejs %>
 <body>
-<% include partials/nav.ejs %>
+<% include ../partials/nav.ejs %>
 <div class="section"></div>
 <body>
 <div class="section"></div>
@@ -17,7 +17,7 @@
         <div class="container">
             <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
                 <i class="material-icons">person</i>
-                <form class="col s12" method="post" action="/login">
+                <form class="col s12" method="post" action="/account/login">
                     <% if (typeof message !='undefined') { %>
                         <div class="row" id="warnRow" style="">
                             <div id="card-alert" class="card deep-purple">
@@ -55,12 +55,12 @@
                 </form>
             </div>
         </div>
-        <a href="#!">Create account</a>
+        <a href="/account/createAccount">Create account</a>
     </div>
 
     <div class="section"></div>
     <div class="section"></div>
 </main>
-<% include partials/footer.ejs %>
+<% include ../partials/footer.ejs %>
 </body>
 </html>
