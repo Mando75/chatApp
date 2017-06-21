@@ -2,20 +2,15 @@
  * Created by starw on 6/19/2017.
  */
 
-let local = null;
-//local = require('../dbconnect');
 let pg = require('pg');
-pg.defaults.ssl = true;
-var conn = null;
-if (local) {
-  conn = local;
-} else {
-  conn = process.env.DATABASE_URL;
-}
+// pg.defaults.ssl = true;
+let connString = process.env.DATABASE_URL || 'postgresql://postgres:rainbowponies@localhost:5432/chatapp';
 const { Pool } = require('pg');
 const SQL = require('sql-template-strings');
-console.log(conn);
-const pool = new Pool(conn);
+console.log(connString);
+const pool = new Pool({
+  connectionString : connString
+});
 
 function addUser(userInfo, callback) {
   // hashPwd handles verifying and hashing the password. If no errors, returns hashed password.
