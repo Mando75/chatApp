@@ -3,7 +3,10 @@
  */
 
 let pg = require('pg');
-// pg.defaults.ssl = true;
+if (process.env.DATABASE_URL) {
+  pg.defaults.ssl = true;
+}
+
 let connString = process.env.DATABASE_URL || 'postgresql://postgres:rainbowponies@localhost:5432/chatapp';
 const { Pool } = require('pg');
 const SQL = require('sql-template-strings');
