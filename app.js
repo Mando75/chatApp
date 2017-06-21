@@ -9,7 +9,6 @@ var expressValidator = require('express-validator');
 
 
 
-
 var index = require('./routes/index');
 var users = require('./routes/users');
 var account = require('./routes/account');
