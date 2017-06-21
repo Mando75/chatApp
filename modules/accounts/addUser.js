@@ -6,6 +6,7 @@ let local = null;
 //local = require('../dbconnect');
 let pg = require('pg');
 pg.defaults.ssl = true;
+var conn = null;
 if (local) {
   conn = local;
 } else {
