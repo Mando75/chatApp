@@ -2,7 +2,7 @@
  * Created by starw on 6/19/2017.
  */
 
-const conn = require('../dbconnect');
+// const conn = require('../dbconnect');
 let pg = require('pg');
 pg.defaults.ssl = true;
 console.log(process.env.DATABASE_URL);
