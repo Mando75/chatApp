@@ -14,6 +14,7 @@ if (local) {
 }
 const { Pool } = require('pg');
 const SQL = require('sql-template-strings');
+console.log(conn);
 const pool = new Pool(conn);
 
 function addUser(userInfo, callback) {
