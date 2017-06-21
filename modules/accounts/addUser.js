@@ -2,7 +2,8 @@
  * Created by starw on 6/19/2017.
  */
 
-// let local = require('../dbconnect');
+let local = null;
+//local = require('../dbconnect');
 let pg = require('pg');
 pg.defaults.ssl = true;
 if (local) {
