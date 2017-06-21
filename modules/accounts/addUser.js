@@ -2,10 +2,14 @@
  * Created by starw on 6/19/2017.
  */
 
-// const conn = require('../dbconnect');
+// let local = require('../dbconnect');
 let pg = require('pg');
 pg.defaults.ssl = true;
-console.log(process.env.DATABASE_URL);
+if (local) {
+  conn = local;
+} else {
+  conn = process.env.DATABASE_URL;
+}
 const { Pool } = require('pg');
 const SQL = require('sql-template-strings');
 const pool = new Pool(conn);
