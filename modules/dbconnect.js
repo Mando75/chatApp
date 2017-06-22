@@ -9,7 +9,7 @@ if (process.env.DATABASE_URL) {
 let connString = process.env.DATABASE_URL || 'postgresql://postgres:rainbowponies@localhost:5432/chatapp';
 const { Pool } = require('pg');
 
-console.log(connString);
+// console.log(connString);
 const pool = new Pool({
   connectionString : connString
 });

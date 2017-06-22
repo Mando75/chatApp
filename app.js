@@ -27,7 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'shhh',
+app.use(session({secret: 'dHwSHOKF3scpz83',
+  cookie: { maxAge: 2628000000 },
   saveUninitialized: true,
   resave: true
 }));
