@@ -14,7 +14,7 @@ function addUser(userInfo, callback) {
     // query the db
     pool.query(SQL`INSERT INTO users (username, email, password) VALUES (${userInfo.username}, ${userInfo.email}, ${hpwd})`, (err, res) => {
       if (err) {
-        throw err;
+        callback(err, null);
       } else {
         let resText = {
           header: "Thanks!",
@@ -32,7 +32,7 @@ function addUser(userInfo, callback) {
       message: "Please try again",
       link: "/account/createAccount"
     };
-    callback("ERROR: Not connected to DB", resText);
+    callback(new Error("ERROR: Not connected to DB"), resText);
   }
 }
 
@@ -47,7 +47,7 @@ function hashPwd(pwd, confirmPwd, callback) {
       message: "Please try again",
       link: "/account/createAccount"
     };
-    callback("ERROR: Passwords don't match", resText);
+    callback(new Error("ERROR: Passwords don't match"), resText);
     return '';
   }
 }

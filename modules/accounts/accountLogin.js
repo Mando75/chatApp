@@ -9,18 +9,20 @@ function accountLogin(userInfo, callback) {
   if(pool) {
     pool.query(SQL`SELECT row_to_json(users) FROM users WHERE username = ${ userInfo.username }`, (err, res) => {
       if(err) {
-        callback("ERROR: Problem with executing database query");
-      } else {
+        callback(new Error("ERROR: Problem with executing database query"));
+      } else if(res.rowCount) {
         let account = res.rows[0].row_to_json;
         if(bcrypt.compareSync(userInfo.pwd, account.password)) {
           callback(null, account);
         } else {
-          callback("ERROR: Passwords didn't match");
+          callback(new Error("ERROR: Problem with executing database query"));
         }
+      } else {
+        callback(new Error("ERROR: Problem with executing database query"));
       }
     })
   } else {
-    callback("ERROR: Could not connect to database");
+    callback(new Error("ERROR: Could not connect to database"));
   }
 }
 
