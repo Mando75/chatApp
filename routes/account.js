@@ -4,8 +4,22 @@
 
 let express = require('express');
 let router = express.Router();
+// let getAccountInfo = require('../modules/accounts/getAccountInfo');
 
 let sess;
+//
+// router.get('/', (req, res, next) => {
+//   sess = req.session;
+//   if (sess.user) {
+//     getAccountInfo(sess.user.user_id, (err, response) => {
+//       res.json(response);
+//       res.end();
+//     });
+//   } else {
+//     res.redirect('/login');
+//     res.end();
+//   }
+// });
 
 /* GET login page. */
 router.get('/login', (req, res, next) => {
@@ -31,13 +45,7 @@ router.post('/login', (req, res, next) => {
           message: "Error: Could log in. Please try again."
         })
       } else {
-        sess.user = {
-          user_id: user.user_id,
-          username: user.username,
-          email: user.email,
-          avatar: user.avatar,
-          status: user.status
-        };
+        sess.user = user;
         res.json(sess.user);
         res.end();
       }
@@ -88,6 +96,38 @@ router.post('/createAccount', (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   req.session.destroy();
   res.render('account/login');
+});
+
+router.put('/updateStatus', (req, res, next) => {
+  sess = req.session;
+  if (sess.user) {
+    let newStatus = req.sanitizeBody('new_status').escape();
+    let updateStatus = require('../modules/accounts/updateStatus');
+    updateStatus(sess.user.user_id, newStatus, (err, response) => {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log(response)
+      }
+    });
+  } else {
+    res.send("you are not logged in");
+    res.end();
+  }
+});
+
+router.get('/getStatus', (req, res, next) => {
+  sess = req.session;
+  if(sess.user) {
+    let getUserStatus = require('../modules/accounts/getUserStatus');
+    getUserStatus(sess.user.user_id, (err, response) => {
+      res.json(response);
+      res.end();
+    })
+  } else {
+    res.send("You are not logged in");
+    res.end();
+  }
 });
 
 module.exports = router;

@@ -7,17 +7,23 @@ let bcrypt = require('bcrypt-nodejs');
 
 function accountLogin(userInfo, callback) {
   if(pool) {
-    pool.query(SQL`SELECT row_to_json(users) FROM users WHERE username = ${ userInfo.username }`, (err, res) => {
+    pool.query(SQL`UPDATE users SET last_login = current_timestamp WHERE username = ${ userInfo.username } 
+                  RETURNING json_build_object('user_id', user_id, 'username', username, 'email', email, 
+                                               'password', password, 'avatar', avatar, 'status', status, 
+                                               'last_login', last_login);`, (err, res) => {
       if(err) {
         callback(new Error("ERROR: Problem with executing database query"));
       } else if(res.rowCount) {
-        let account = res.rows[0].row_to_json;
+        // console.log(res.rows.);
+        let account = res.rows[0].json_build_object;
         if(bcrypt.compareSync(userInfo.pwd, account.password)) {
+          delete account.password;
           callback(null, account);
         } else {
           callback(new Error("ERROR: Problem with executing database query"));
         }
       } else {
+        console.log(res);
         callback(new Error("ERROR: Problem with executing database query"));
       }
     })
