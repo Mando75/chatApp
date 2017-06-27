@@ -23,7 +23,11 @@ let sess;
 
 /* GET login page. */
 router.get('/login', (req, res, next) => {
-  res.render('account/login');
+  res.render('account/login', {
+    user: {
+      username: 'larry'
+    }
+  });
 });
 
 /**
@@ -42,7 +46,10 @@ router.post('/login', (req, res, next) => {
       if(err) {
         console.log(err);
         res.render('account/login', {
-          message: "Error: Could log in. Please try again."
+          message: "Error: Could log in. Please try again.",
+          user: {
+            username: 'blank'
+          }
         })
       } else {
         sess.user = user;
@@ -108,6 +115,8 @@ router.put('/updateStatus', (req, res, next) => {
         console.log(err);
       } else {
         console.log(response)
+        res.json(response);
+        res.end();
       }
     });
   } else {

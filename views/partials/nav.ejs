@@ -6,14 +6,14 @@
             <a href="#" data-activates="mobile-demo" class="menu"><i class="material-icons right">menu</i>Menu</a>
         </ul>
         <ul class="side-nav" id="mobile-demo">
-            <% if(typeof email != 'undefined' ) { %>
+            <!--Here-->
             <li><div class="userView">
                     <div class="background">
                         <img src="https://static.pexels.com/photos/6675/flight-mountains-sky-flying.jpeg">
                     </div>
                     <a href="#!user"><i class="material-icons">account_circle</i></a>
-                    <a href="#!name"><span class="secondary-text-color name"><%= typeof name !='undefined' ? name : 'not logged in' %></span></a>
-                    <a href="#!email"><span class="secondary-text-color email"><%= typeof email !='undefined' ? email : 'not logged in' %></span></a>
+                    <a href="#!name"><span class="secondary-text-color name"><%= user.username %></span></a>
+                    <a href="#!email"><span class="secondary-text-color email">Here</span></a>
                 </div></li>
             <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
             <li><a href="#!">Second Link</a></li>
@@ -21,9 +21,9 @@
             <li><a class="subheader">Subheader</a></li>
             <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
             <li><a class="waves-effect" href="/account/logout">Logout</a></li>
-            <%} else { %>
+           <!--here -->
             <li class="secondary-text-color"><a role="button" class="btn btn-small waves-effect purple" href="/account/login">Please Login</a></li>
-            <% } %>
+            <!--here-->
         </ul>
     </div>
 </nav>

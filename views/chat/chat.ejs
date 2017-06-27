@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<% include ../partials/head.ejs %>
+<body>
+<% include ../partials/nav.ejs %>
+<script>var user = <%-JSON.stringify(user) %></script>
+    <div class="container">
+        <div class="row">
+            <div id="content" class="col s12">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" id="field">
+                <label for="field">Send Message</label>
+                <button type="button" id="send" class="btn purple">Send Message</button>
+            </div>
+        </div>
+    </div>
+<% include ../partials/footer.ejs %>
+<script src="/javascripts/chat.js"></script>
+<script src="socket.io/socket.io.js"></script>
+</body>
+</html>

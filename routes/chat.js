@@ -3,6 +3,7 @@
  */
 let express = require('express');
 let router = express.Router();
+let sess;
 
 router.get('/getStatuses', (req, res) => {
   let getStatuses = require('../modules/chats/getStatuses');
@@ -14,6 +15,16 @@ router.get('/getStatuses', (req, res) => {
       res.end();
     }
   })
+});
+
+router.get('/', (req, res) => {
+  sess = req.session;
+  if(sess.user) {
+    res.render('chat/chat', {
+      user: sess.user
+    }) } else {
+      res.redirect('/account/login');
+    }
 });
 
 module.exports = router;

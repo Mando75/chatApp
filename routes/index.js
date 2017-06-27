@@ -1,17 +1,22 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
-var sess;
+let sess;
 /* GET home page. */
 router.get('/', (req, res, next) => {
   sess = req.session;
-  if(sess.email) {
+  console.log(JSON.stringify(sess.user));
+  if(sess.user) {
     res.render('index', {
-      email: "johndoe@mail.com",
-      name: "john doe"
+      user: sess.user
     });
   } else {
-    res.render('index');
+
+    res.render('index', {
+      user : {
+        username: 'larry'
+      }
+    });
   }
 
 });
