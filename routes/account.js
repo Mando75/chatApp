@@ -63,7 +63,11 @@ router.post('/login', (req, res, next) => {
  * Get the createAccount page. Renders an html form
  */
 router.get('/createAccount', (req, res, next) => {
-  res.render('account/createAccount');
+  res.render('account/createAccount', {
+    user: {
+      username: 'blank'
+    }
+  });
   res.end();
 });
 
