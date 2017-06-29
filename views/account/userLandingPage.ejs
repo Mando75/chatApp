@@ -40,31 +40,10 @@
                     <p>Want to see which of your friends are here? No worries, take a quick look at your friends' status before jumping in the chat</p>
                 </div>
                 <div class="card-action center">
-                    <a href="#modal1" id="getFriends">View My Friends List</a>
+                    <a href="#modal1" onclick="getFriends()">View My Friends List</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>Your Friends</h4>
-        <table class="highlight responsive-table" id="table">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Username</th>
-                <th>Status</th>
-                <th>Last Login</th>
-            </tr>
-            </thead>
-            <tbody id="tbody">
 
-            </tbody>
-        </table>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
-</div>
-<script src="/javascripts/accounts.js"></script>

@@ -1,8 +1,9 @@
 /**
  * Created by starw on 6/21/2017.
  */
-
-$('#getFriends').click(function() {
+function getFriends () {
+  $('#tbody').html('');
+  console.log('getting Friends!');
   $.get('/friends/getFriends', function(data, status) {
     var rows = data;
     $.each(rows, function(i, v) {
@@ -23,8 +24,10 @@ $('#getFriends').click(function() {
       $('#tbody').append(trow);
     })
   })
-});
+}
 
 $('#close').click(function() {
   $('#tbody').html('');
 });
+
+$('#getFriendsNav').click(getFriends);

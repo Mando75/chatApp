@@ -2,6 +2,11 @@
  * Created by starw on 6/24/2017.
  */
 var messages = [];
+
+// $(document).ready(function(){
+//   $('#content').animate({
+//     scrollTop: $('#content')[0].scrollHeight}, 2000);
+// });
 window.onload = function() {
 
 
@@ -21,14 +26,26 @@ window.onload = function() {
       messages.push(data);
       var html = '';
       for(var i=0; i<messages.length; i++) {
+        html += '<p>';
         html += '<b>' + (messages[i].username ? messages[i].username : 'Server') + ': </b>';
-        html += messages[i].message + '<br />';
+        html += messages[i].message;
+        html += '</p><br/>';
       }
+
       content.innerHTML = html;
       field.value = '';
     } else {
       console.log("There is a problem:", data);
     }
+  });
+
+  $("#scrollBox").bind("DOMSubtreeModified",function() {
+    console.log('scroll');
+    // $("#scrollBox").animate({
+    //   scrollTop: $("#content")[0].scrollHeight
+    // });
+    var height = $('#scrollBox')[0].scrollHeight;
+    $('#scrollBox').scrollTop(height);
   });
 
   sendButton.onclick = function() {
