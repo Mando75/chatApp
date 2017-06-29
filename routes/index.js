@@ -13,9 +13,10 @@ router.get('/', (req, res, next) => {
   } else {
 
     res.render('index', {
-      user : {
-        username: 'larry'
-      }
+
+      // user : {
+      //   username: 'larry'
+      // }
     });
   }
 

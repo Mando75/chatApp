@@ -18,3 +18,46 @@ body {
 #createForm {
   margin: 2%;
 }
+
+.background {
+  max-width:100%;
+  max-height:100%;
+}
+
+#avatar {
+  height: 40%;
+  width: 40%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+#username {
+  margin-top: 0;
+  padding-top: 2px;
+}
+
+#username, #email {
+  font-weight: bolder;
+}
+
+.user-info-bg {
+  background-color: rgba(255, 255, 255, .5);
+  /*border-radius: 50px;*/
+}
+
+.full-view {
+  /*background-image: url("")*/
+}
+
+
+.favatar {
+  width: 24px;
+  height: 24px;
+  /* fill the container, preserving aspect ratio, and cropping to fit */
+  background-size: cover;
+  /* center the image vertically and horizontally */
+  background-position: center;
+  /* round the edges to a circle with border radius 1/2 container size */
+  border-radius: 50%;
+}

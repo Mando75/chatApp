@@ -1,0 +1,70 @@
+<div class="section no-pad-bot full-view">
+    <div class="container">
+        <br><br>
+        <section>
+            <div class="row">
+                <div class="col s12">
+                    <h3 class="header center">Welcome <%= user.username %>!</h3>
+                    <h5 class="header center">What would you like to do first?</h5>
+                </div>
+            </div>
+        </section>
+        <div class="row">
+            <div class="card col s12 l3">
+                <div class="card-content">
+                    <span class="card-title grey-text text-darken-4 center">View Your Account</span>
+                    <br><br>
+                    <p class="">Here you can manage your account preferences, like your username, password, and avatar. This is also where you can view your saved chats</p>
+                </div>
+                <div class="card-action center">
+                    <a href="/account">Take me to my Account</a>
+                </div>
+            </div>
+
+            <div class="card col s12 l3 offset-l1">
+                <div class="card-content">
+                    <span class="card-title grey-text text-darken-4 center">Jump in the Chat</span>
+                    <br><br>
+                    <p>What are you waiting for? That chat is now live! Come join in the conversation and get ready to meet new people and have fun. </p>
+                </div>
+                <div class="card-action center">
+                    <a href="/chat">Take me to the Chat</a>
+                </div>
+
+            </div>
+
+            <div class="card col s12 l3 offset-l1">
+                <div class="card-content">
+                    <span class="card-title grey-text text-darken-4 center">See Who's Online</span>
+                    <br><br>
+                    <p>Want to see which of your friends are here? No worries, take a quick look at your friends' status before jumping in the chat</p>
+                </div>
+                <div class="card-action center">
+                    <a href="#modal1" id="getFriends">View My Friends List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Your Friends</h4>
+        <table class="highlight responsive-table" id="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Username</th>
+                <th>Status</th>
+                <th>Last Login</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+<script src="/javascripts/accounts.js"></script>

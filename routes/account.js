@@ -23,11 +23,7 @@ let sess;
 
 /* GET login page. */
 router.get('/login', (req, res, next) => {
-  res.render('account/login', {
-    user: {
-      username: 'larry'
-    }
-  });
+  res.render('account/login');
 });
 
 /**
@@ -46,14 +42,11 @@ router.post('/login', (req, res, next) => {
       if(err) {
         console.log(err);
         res.render('account/login', {
-          message: "Error: Could log in. Please try again.",
-          user: {
-            username: 'blank'
-          }
+          message: "Error: Could log in. Please try again."
         })
       } else {
         sess.user = user;
-        res.json(sess.user);
+        res.redirect('/');
         res.end();
       }
   });
@@ -63,11 +56,7 @@ router.post('/login', (req, res, next) => {
  * Get the createAccount page. Renders an html form
  */
 router.get('/createAccount', (req, res, next) => {
-  res.render('account/createAccount', {
-    user: {
-      username: 'blank'
-    }
-  });
+  res.render('account/createAccount');
   res.end();
 });
 

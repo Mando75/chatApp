@@ -55,7 +55,13 @@ router.get('/getFriends', (req, res, next) => {
   if (sess.user) {
     let getFriends = require('../modules/friends/getFriends');
     getFriends(sess.user.user_id, (err, resText) => {
-      res.json(resText);
+      if(err) {
+        console.log(err)
+      } else {
+        res.json(resText);
+        res.end();
+      }
+
     })
   } else {
     res.send("You are not logged in");

@@ -6,24 +6,28 @@
             <a href="#" data-activates="mobile-demo" class="menu"><i class="material-icons right">menu</i>Menu</a>
         </ul>
         <ul class="side-nav" id="mobile-demo">
-            <!--Here-->
+            <% if( typeof user == 'object' && user) { %>
             <li><div class="userView">
                     <div class="background">
-                        <img src="https://static.pexels.com/photos/6675/flight-mountains-sky-flying.jpeg">
+                        <img class='responsive-img' src="https://static.pexels.com/photos/6675/flight-mountains-sky-flying.jpeg">
                     </div>
-                    <a href="#!user"><i class="material-icons">account_circle</i></a>
-                    <a href="#!name"><span class="secondary-text-color name"><%= user.username %></span></a>
-                    <a href="#!email"><span class="secondary-text-color email">Here</span></a>
+                    <% if (user.avatar) { %>
+                    <a href="/account"><img id="avatar" src=<%= user.avatar %>></a>
+                    <% } else { %>
+                    <a href="/account"><i class="material-icons">account_circle</i></a>
+                    <% } %>
+                    <a href="/account"><span id='username' class="name black-text"><%= user.username %></span></a>
+                    <a href="/account"><span id='email' class="email black-text"><%= user.email %></span></a>
                 </div></li>
             <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
             <li><a href="#!">Second Link</a></li>
             <li><div class="divider"></div></li>
             <li><a class="subheader">Subheader</a></li>
             <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-            <li><a class="waves-effect" href="/account/logout">Logout</a></li>
-           <!--here -->
+            <li><a class="btn btn-small purple waves-effect" href="/account/logout" role="button">Logout</a></li>
+            <% }  else  { %>
             <li class="secondary-text-color"><a role="button" class="btn btn-small waves-effect purple" href="/account/login">Please Login</a></li>
-            <!--here-->
+            <% } %>
         </ul>
     </div>
 </nav>
