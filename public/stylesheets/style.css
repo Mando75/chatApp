@@ -27,8 +27,8 @@ body {
 }
 
 #avatar {
-  height: 40%;
-  width: 40%;
+  height: 75px;
+  width: 75px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
@@ -121,4 +121,16 @@ body {
   height: 48px;
   line-height: 48px;
   padding: 0 32px;
+}
+
+
+.userAv {
+  height: 20% !important;
+  width: 20%;
+  border-radius: 100%;
+}
+
+.avatar-edit a {
+  text-decoration: none;
+  color: inherit;
 }

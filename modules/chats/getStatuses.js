@@ -11,16 +11,15 @@ function getStatuses(callback) {
   if (pool) {
     pool.query(SQL`SELECT array_to_json(array_agg(row_to_json(t))) FROM ( SELECT * FROM statuses) t`, (err, res) => {
       if (err) {
-        callback(err);
+        callback(new Error('ERROR: There was a problem with the server. Please try again'));
       } else if (res.rowCount) {
-        console.log(res.rows[0]);
         callback(null, res.rows[0].array_to_json);
       } else {
-        callback(new Error("ERROR: No results from db"))
+        callback(new Error("ERROR: No reply from server. Please refresh and try again"))
       }
     })
   } else {
-    callback(new Error("Error: Could not connect to db"));
+    callback(new Error("Error: Could not connect to server. Please refresh and try again"));
   }
 }
 

@@ -12,7 +12,7 @@
                         <img class='responsive-img' src="https://static.pexels.com/photos/6675/flight-mountains-sky-flying.jpeg">
                     </div>
                     <% if (user.avatar) { %>
-                    <a href="/account"><img id="avatar" src=<%= user.avatar %>></a>
+                    <a href="/account"><img id="avatar" class="avatar-img" src=<%= user.avatar %>></a>
                     <% } else { %>
                     <a href="/account"><i class="material-icons">account_circle</i></a>
                     <% } %>
@@ -50,4 +50,3 @@
         <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
     </div>
 </div>
-<script src="/javascripts/accounts.js"></script>

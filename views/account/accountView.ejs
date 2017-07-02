@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<% include ../partials/head.ejs %>
+<body>
+<% include ../partials/nav.ejs %>
+<main>
+    <div class="container">
+        <div class="section">
+            <br><br>
+            <div class="center">
+                <h3 class="header center">Your Information</h3>
+                <!--<span>(Click any item to edit it)</span>-->
+            </div>
+            <br>
+            <div class="row">
+                <div class="col s12 center avatar-edit">
+                    <% if(user.avatar ) { %>
+                    <a href="#modalAv" id="editAvatar"  class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click to edit"><img class="responsive-img userAv avatar-img" src="<%= user.avatar %>" alt="avatar"></a>
+                    <% } else { %>
+                    <a href="#modalAv" id="editAvatar"  class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click to edit"><i class="material-icons" style="font-size: 10em">person</i></a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center avatar-edit">
+                    <a href="#modalU" id="editUsername" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click to edit"><h5 class="name"><%= user.username %></h5></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 l4 avatar-edit">
+                    <a href="#modalE" id="editEmail"  class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click to edit"><h5>Email: </h5><h5 class="email"><%= user.email %></h5></a>
+                </div>
+                <div class="col s12 l4 avatar-edit">
+                    <a href="#modalP" id="editPwd"  class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click to edit"><h5 class="">Password: </h5><i class="material-icons">brightness_1</i><i class="material-icons">brightness_1</i><i class="material-icons">brightness_1</i><i class="material-icons">brightness_1</i></a>
+                </div>
+                <div class="col s12 l4 avatar-edit input-field" id="status-list">
+                    <h5>Status:</h5>
+                    <select class='status' name="new_status" id="status" onchange="upStatus()">
+                        <%
+                            for(let i = 0; i < statuses.length; i++) {
+                              %><option value="<%= statuses[i].status_id %>" <% if( user.status == statuses[i].status_id ) { %> selected <% } %>><%= statuses[i].status %></option> <%
+                            }
+                        %>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--To update the avatar-->
+<div id="modalAv" class="modal">
+    <div class="modal-content">
+        <h4>Update Your Avatar</h4>
+        <div class="input-field">
+            <i class="material-icons prefix">image</i>
+            <input type="text" name="new_avatar" id="new_avatar">
+            <label for="new_avatar">Please provide a link to your new Avatar</label>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn purple modal-action modal-close" id="subAvatar" onclick="upAvatar()">Submit</button>
+        <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+<!--To update the Username-->
+<div id="modalU" class="modal">
+    <div class="modal-content">
+        <h4>Update Your Username</h4>
+        <div class="input-field">
+            <i class="material-icons prefix">account_circle</i>
+            <input type="text" name="new_username" id="new_username" value="<%= user.username %>">
+            <label for="new_avatar">Please provide your new username</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn purple modal-action modal-close" id="subUsername" onclick="upUsername()">Submit</button>
+        <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="modalE" class="modal">
+    <div class="modal-content">
+        <h4>Update Your Email</h4>
+        <div class="input-field">
+            <i class="material-icons prefix">email</i>
+            <input type="email" name="new_email" id="new_email" class="validate" value="<%= user.email %>">
+            <label for="new_avatar">Please provide your new email</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn purple modal-action modal-close" id="subEmail" onclick="upEmail()">Submit</button>
+        <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="modalP" class="modal">
+    <div class="modal-content">
+        <h4>Update Your Password</h4>
+        <div class="input-field">
+            <i class="material-icons prefix">lock_open</i>
+            <input type="password" name="old_pwd" id="old_pwd" class="validate">
+            <label for="old_pwd">Please provide your previous password</label>
+        </div>
+        <div class="input-field">
+            <i class="material-icons prefix">lock_outline</i>
+            <input type="password" name="new_pwd" id="new_pwd" class="validate">
+            <label for="new_avatar">Please provide your new password</label>
+        </div>
+        <div class="input-field">
+            <i class="material-icons prefix">lock</i>
+            <input type="password" name="confirm_pwd" id="confirm_pwd" class="validate">
+            <label for="confirm_pwd">Please confirm your new password</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn purple modal-action modal-close" id="subPwd" onclick="upPwd()">Submit</button>
+        <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<%include ../partials/footer.ejs %>
+</body>
+</html>

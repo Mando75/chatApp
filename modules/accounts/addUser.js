@@ -14,13 +14,22 @@ function addUser(userInfo, callback) {
     // query the db
     pool.query(SQL`INSERT INTO users (username, email, password) VALUES (${userInfo.username}, ${userInfo.email}, ${hpwd})`, (err, res) => {
       if (err) {
-        callback(err, null);
+        if(err.code == 23505){
+          callback(new Error('ERROR: Username already exists'),{
+           header: "Whoops!",
+            subheader: "That username is already taken",
+            message: "Please try another username",
+            link: "/account/createAccount"
+          });
+        } else {
+          callback(err, null);
+        }
       } else {
         let resText = {
           header: "Thanks!",
           subheader: "Your Account has been created successfully!",
           message: "Please login",
-          link: "/login"
+          link: "/account/login"
         };
         callback(null, resText);
       }

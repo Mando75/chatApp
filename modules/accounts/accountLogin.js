@@ -7,7 +7,7 @@ let bcrypt = require('bcrypt-nodejs');
 
 function accountLogin(userInfo, callback) {
   if(pool) {
-    pool.query(SQL`UPDATE users SET last_login = current_timestamp WHERE username = ${ userInfo.username } 
+    pool.query(SQL`UPDATE users SET last_login = current_timestamp, status = 2 WHERE username = ${ userInfo.username } 
                   RETURNING json_build_object('user_id', user_id, 'username', username, 'email', email, 
                                                'password', password, 'avatar', avatar, 'status', status, 
                                                'last_login', last_login);`, (err, res) => {

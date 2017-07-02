@@ -7,8 +7,7 @@ const SQL = require('sql-template-strings');
 
 function updateStatus(user, status_id, callback) {
   if (pool) {
-    pool.query(SQL`UPDATE users SET status = ${ status_id }, last_modified = current_timestamp WHERE user_id = ${ user } RETURNING json_build_object('status_id', status_id, 'status', status)`, (err, res) => {
-      console.log(res.rowCount);
+    pool.query(SQL`UPDATE users SET status = ${ status_id }, last_modified = current_timestamp WHERE user_id = ${ user } RETURNING json_build_object('status', status)`, (err, res) => {
       if (err) {
         callback(err);
       } else if (res.rowCount) {

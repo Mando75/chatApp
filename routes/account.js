@@ -7,19 +7,29 @@ let router = express.Router();
 // let getAccountInfo = require('../modules/accounts/getAccountInfo');
 
 let sess;
-//
-// router.get('/', (req, res, next) => {
-//   sess = req.session;
-//   if (sess.user) {
-//     getAccountInfo(sess.user.user_id, (err, response) => {
-//       res.json(response);
-//       res.end();
-//     });
-//   } else {
-//     res.redirect('/login');
-//     res.end();
-//   }
-// });
+
+router.get('/', (req, res, next) => {
+  sess = req.session;
+  if (sess.user) {
+    let getStatuses = require('../modules/chats/getStatuses');
+    getStatuses((err, response) => {
+      if(err) {
+        console.log(err);
+        res.end();
+      } else {
+        sess.statuses = response;
+        res.render('account/accountView', {
+          user: sess.user,
+          statuses: sess.statuses
+        });
+        res.end();
+      }
+    })
+  } else {
+    res.redirect('/account/login');
+    res.end();
+  }
+});
 
 /* GET login page. */
 router.get('/login', (req, res, next) => {
@@ -94,11 +104,20 @@ router.post('/createAccount', (req, res, next) => {
  * Renders the login page
  */
 router.get('/logout', (req, res, next) => {
-  req.session.destroy();
-  res.render('account/login');
+  let updateUserStatus = require('../modules/accounts/updateStatus');
+  updateUserStatus(sess.user.user_id, 5, (err, response) => {
+    if(err) {
+      console.log(err);
+      res.end();
+    } else {
+      req.session.destroy();
+      res.render('account/login');
+    }
+  });
+
 });
 
-router.put('/updateStatus', (req, res, next) => {
+router.post('/updateStatus', (req, res, next) => {
   sess = req.session;
   if (sess.user) {
     let newStatus = req.sanitizeBody('new_status').escape();
@@ -106,14 +125,27 @@ router.put('/updateStatus', (req, res, next) => {
     updateStatus(sess.user.user_id, newStatus, (err, response) => {
       if(err) {
         console.log(err);
+        res.json(
+            {
+              status: sess.user.status,
+              message: "ERROR: There was a problem updating the status. Please try again"
+            }
+        )
       } else {
-        console.log(response)
-        res.json(response);
+        sess.user.status = response.status;
+        console.log(response.status);
+        res.json({
+          status: sess.user.status,
+          message: "Success! Updated status"
+        });
         res.end();
       }
     });
   } else {
-    res.send("you are not logged in");
+    res.json({
+      status: null,
+      message: "you are not logged in"
+    });
     res.end();
   }
 });
@@ -123,8 +155,13 @@ router.get('/getStatus', (req, res, next) => {
   if(sess.user) {
     let getUserStatus = require('../modules/accounts/getUserStatus');
     getUserStatus(sess.user.user_id, (err, response) => {
-      res.json(response);
-      res.end();
+      if(err) {
+        console.log(err);
+        res.end();
+      } else {
+        res.json(response);
+        res.end();
+      }
     })
   } else {
     res.send("You are not logged in");
@@ -132,4 +169,130 @@ router.get('/getStatus', (req, res, next) => {
   }
 });
 
+/**
+ * A function to update the users avatar image link
+ */
+router.post('/upAvatar', (req, res, next)=> {
+  sess = req.session;
+  let newAv = req.body.new_avatar;
+  console.log(newAv);
+  if(sess.user) {
+    let updateAvatar = require('../modules/accounts/updateAvatar');
+    updateAvatar(sess.user.user_id, newAv, (err, response) => {
+      if(err) {
+        console.log(err);
+        res.json({
+          avatar : sess.user.avatar,
+          message : err.message
+        });
+        res.end();
+      } else {
+        sess.user.avatar = response;
+        // console.log(response);
+        res.json({
+          avatar : sess.user.avatar,
+          message: 'Success! Avatar updated'
+        });
+        res.end();
+      }
+    });
+  } else {
+    res.json({
+      avatar: null,
+      message: 'You are not logged in'
+    });
+    res.end();
+  }
+});
+
+router.post('/upUsername', (req, res, next)=> {
+  sess = req.session;
+  if(sess.user) {
+  let new_username = req.sanitizeBody('new_username').escape();
+  let updateUsername = require('../modules/accounts/updateUsername');
+  updateUsername(sess.user.user_id, new_username, (err, response) => {
+    if(err) {
+      console.log(err);
+      res.json({
+        username: sess.user.username,
+        message: err.message
+      });
+      res.end();
+    } else {
+      sess.user.username = response;
+      res.json({
+        username: sess.user.username,
+        message: 'Success! Username updated'
+      });
+      res.end();
+    }
+  });
+  } else {
+    res.json({
+      username: null,
+      message: 'You are not logged in'
+    });
+    res.end()
+  }
+});
+
+router.post('/upEmail', (req,res, next) => {
+  sess = req.session;
+  if(sess.user) {
+    let new_email = req.sanitizeBody('new_email').escape();
+    let updateEmail = require('../modules/accounts/updateEmail');
+    updateEmail(sess.user.user_id, new_email, (err, response) => {
+      if(err) {
+        res.json({
+          email: sess.user.email,
+          message: err.message
+        });
+        res.end();
+      } else {
+        sess.user.email = response;
+        res.json({
+          email: sess.user.email,
+          message: 'Success! Email updated'
+        });
+        res.end();
+      }
+    });
+
+  } else {
+    res.send('You are not logged in');
+    res.end();
+  }
+});
+
+
+router.post('/upPwd', (req,res, next) => {
+  sess = req.session;
+  if(sess.user) {
+    let pwd = {
+      newPwd : req.sanitizeBody('new_pwd').escape(),
+      confirmPwd : req.sanitizeBody('confirm_pwd').escape(),
+      oldPwd : req.sanitizeBody('old_pwd').escape()
+    };
+    // console.log(pwd);
+    let updatePassword = require('../modules/accounts/updatePwd');
+    updatePassword(sess.user.user_id, pwd, (err, response) => {
+      if(err) {
+        console.log(err);
+        res.json({
+          message: err.message
+        });
+        res.end();
+      } else {
+        console.log(response);
+        res.json({
+          message: response
+        });
+        res.end();
+      }
+    });
+  } else {
+    res.send('you are not logged in');
+    res.end();
+  }
+});
 module.exports = router;

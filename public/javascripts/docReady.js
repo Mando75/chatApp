@@ -9,4 +9,5 @@ $( document ).ready(function(){
   //$('.collapsible').collapsible();
   $('.modal').modal();
   $('.parallax').parallax();
+  $('select').material_select();
 });
