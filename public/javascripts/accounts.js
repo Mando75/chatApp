@@ -44,8 +44,9 @@ function upAvatar (){
       console.log(response);
       var avatars = $('.avatar-img');
       $.each(avatars, function(i, v){
-        v.setAttribute('src', response);
+        v.setAttribute('src', response.avatar);
       })
+    Materialize.toast(response.message, 4000);
     });
   }
 }
