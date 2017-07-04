@@ -259,7 +259,10 @@ router.post('/upEmail', (req,res, next) => {
     });
 
   } else {
-    res.send('You are not logged in');
+    res.json({
+      email: null,
+      message: 'You are not logged in'
+    });
     res.end();
   }
 });

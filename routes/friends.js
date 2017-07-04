@@ -18,7 +18,8 @@ router.post('/addFriend', (req, res, next) => {
 
     addFriend(reqInfo, (err, resText) => {
       if(err) {
-        console.log('poop');
+        console.log(err.message);
+        res.send(err.message);
       } else {
         console.log(res);
         res.json(resText);
