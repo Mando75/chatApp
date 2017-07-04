@@ -14,7 +14,7 @@
                     <% if (user.avatar) { %>
                     <a href="/account"><img id="avatar" class="avatar-img" src=<%= user.avatar %>></a>
                     <% } else { %>
-                    <a href="/account"><i class="material-icons">account_circle</i></a>
+                    <a href="/account"><img id="avatar" src="/images/person.svg" class="avatar-img"></a>
                     <% } %>
                     <a href="/account"><span id='username' class="name black-text"><%= user.username %></span></a>
                     <a href="/account"><span id='email' class="email black-text"><%= user.email %></span></a>
