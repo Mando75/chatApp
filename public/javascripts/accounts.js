@@ -101,7 +101,7 @@ function upPwd() {
       Materialize.toast(res.message, 4000);
     });
   } else {
-    Materialize.toast("Please fill in all the fields"), 4000;
+    Materialize.toast("Please fill in all the fields",4000);
   }
 }
 
@@ -113,8 +113,8 @@ function upStatus() {
       new_status: status
     }, function(res, status) {
       console.log(res);
+      $('#' + user.user_id).html($("#status option:selected").text());
       Materialize.toast(res.message, 4000)
-
     })
   }
 

@@ -3,35 +3,71 @@
 /**
  * Module dependencies.
  */
-
-var app = require('../app');
-var debug = require('debug')('chatapp:server');
-var http = require('http');
+let app = require('../app');
+let debug = require('debug')('chatapp:server');
+let http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+let port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-var server = http.createServer(app);
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
+server.listen(port);
 
-var io = require('socket.io').listen(server.listen(port));
+/**
+ * Set up the chat system. Code inspired by http://psitsmike.com/2011/09/node-js-and-socket-io-chat-tutorial/
+ */
+
+//all the users connected to the chat
+let users = {};
+
+let io = require('socket.io').listen(server);
 // server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
 io.sockets.on('connection', function (socket) {
-  socket.emit('message', { message: 'Welcome to the chat' });
-  socket.on('send', function (data) {
-    io.sockets.emit('message', data);
+
+  // when the client emits 'sendchat', this listens and executes
+  socket.on('sendchat', function (data) {
+    // we tell the client to execute 'updatechat' with 2 parameters
+    io.sockets.emit('updatechat', socket.username, data);
+  });
+
+  // when the client emits 'adduser', this listens and executes
+  socket.on('adduser', function(user) {
+    // we store the username in the socket session for this client
+    socket.username = user.username;
+    socket.user_id = user.user_id;
+    console.log(socket.user_id, socket.username);
+    // add the client's username to the global list
+    users[user.user_id] = user;
+    // echo to client they've connected
+    socket.emit('updatechat', 'SERVER', 'you have connected');
+    // echo globally (all clients) that a person has connected
+    socket.broadcast.emit('updatechat', 'SERVER', user.username + ' has connected');
+    // update the list of users in chat, client-side
+    io.sockets.emit('updateusers', users);
+  });
+
+  // when the user disconnects.. perform this
+  socket.on('disconnect', function(){
+    // remove the username from global usernames list
+    delete users[socket.user_id];
+    // update list of users in chat, client-side
+    io.sockets.emit('updateusers', users);
+    // echo globally that this client has left
+    socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
   });
 });
 /**

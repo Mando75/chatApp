@@ -134,3 +134,17 @@ body {
   text-decoration: none;
   color: inherit;
 }
+
+.chat-av {
+  width: 15%;
+  margin-right: 10px;
+  border-radius: 50px;
+}
+
+.chat-status {
+  float: right;
+}
+
+.side li>a {
+  margin-top: 10px;
+}

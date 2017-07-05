@@ -14,7 +14,7 @@ function accountLogin(userInfo, callback) {
       if(err) {
         callback(new Error("ERROR: Problem with executing database query"));
       } else if(res.rowCount) {
-        // console.log(res.rows.);
+        console.log(res.rows[0].json_build_object);
         let account = res.rows[0].json_build_object;
         if(bcrypt.compareSync(userInfo.pwd, account.password)) {
           delete account.password;

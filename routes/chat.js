@@ -19,12 +19,24 @@ router.get('/getStatuses', (req, res) => {
 
 router.get('/', (req, res) => {
   sess = req.session;
-  if(sess.user) {
-    res.render('chat/chat', {
-      user: sess.user
-    }) } else {
-      res.redirect('/account/login');
-    }
+  if (sess.user) {
+    let getStatuses = require('../modules/chats/getStatuses');
+    getStatuses((err, response) => {
+      if (err) {
+        console.log(err);
+        res.end();
+      } else {
+        sess.statuses = response;
+        res.render('chat/chat', {
+          user: sess.user,
+          statuses: sess.statuses
+        });
+        res.end();
+      }
+    });
+  } else {
+    res.redirect('/account/login');
+  }
 });
 
 module.exports = router;
