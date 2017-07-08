@@ -3,8 +3,6 @@
  */
 
 window.onload = function() {
-
-
   if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     var socket = io.connect(window.location.hostname + ':3000');
   } else {
@@ -27,9 +25,9 @@ window.onload = function() {
 
   });
 
-socket.on('statusupdate', function(user_id, status) {
-  $('#' + user_id).text(status);
-});
+  socket.on('statusupdate', function(user_id, status) {
+    $('#' + user_id).text(status);
+  });
 
   // listener, whenever the server emits 'updateusers', this updates the username list
   socket.on('updateusers', function(users) {
@@ -69,10 +67,6 @@ socket.on('statusupdate', function(user_id, status) {
 
 
   $("#scrollBox").bind("DOMSubtreeModified",function() {
-    console.log('scroll');
-    // $("#scrollBox").animate({
-    //   scrollTop: $("#content")[0].scrollHeight
-    // });
     var height = $('#scrollBox')[0].scrollHeight;
     $('#scrollBox').scrollTop(height);
   });

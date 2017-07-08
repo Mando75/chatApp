@@ -22,7 +22,7 @@ function getFriends () {
       var ds= v.last_login;
       var day= new Date(ds.replace(' ','T')+'Z');
       day.toUTCString();
-      trow += '<td>' + day.toString().substr(0,15) + '</td>';
+      trow += '<td>' + day.toString().substr(0,15) + '</td><td class="center"><a href="#!" onclick="removeFriend('+  v.rel_id + ')"><i class="material-icons grey-text">remove_circle_outline</i></a></td>';
       trow += '</tr>';
       $('#tbody').append(trow);
     })
@@ -30,6 +30,21 @@ function getFriends () {
 }
 
 $('#getFriendsNav').click(getFriends);
+
+
+/**
+ * a function to remove a friend
+ */
+function removeFriend(rel_id) {
+  if(rel_id) {
+    $.post('friends/removeFriend', {
+      rel_id: rel_id
+    }, function (data, status) {
+      console.log(data);
+      getFriends();
+    });
+  }
+}
 
 /**
  * A function to update the avatar
@@ -50,6 +65,9 @@ function upAvatar (){
   }
 }
 
+/**
+ * A functino to update the username
+ */
 function upUsername() {
   var newusername = $('#new_username').val();
   if(newusername) {
@@ -66,6 +84,9 @@ function upUsername() {
   }
 }
 
+/**
+ * a function to update the email
+ */
 function upEmail() {
   var newemail = $('#new_email').val();
   console.log(newemail);
@@ -85,6 +106,9 @@ function upEmail() {
   }
 }
 
+/**
+ * a function to update user's password
+ */
 function upPwd() {
   var oldPwd = $('#old_pwd').val();
   var newPwd = $('#new_pwd').val();
@@ -104,7 +128,9 @@ function upPwd() {
   }
 }
 
-
+/**
+ * function to update user status
+ */
 function upStatus() {
   var status = $('#status').val();
   if(status) {
@@ -119,6 +145,9 @@ function upStatus() {
 
 }
 
+/**
+ * A function to create an account
+ */
 function createAccount() {
   var username = $('#username').val();
   var email = $('#email').val();
@@ -139,3 +168,4 @@ function createAccount() {
 
   }
 }
+
