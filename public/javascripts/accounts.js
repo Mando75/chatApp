@@ -24,7 +24,6 @@ function getFriends () {
       day.toUTCString();
       trow += '<td>' + day.toString().substr(0,15) + '</td>';
       trow += '</tr>';
-      console.log(trow);
       $('#tbody').append(trow);
     })
   })
@@ -113,7 +112,7 @@ function upStatus() {
       new_status: status
     }, function(res, status) {
       console.log(res);
-      $('#' + user.user_id).html($("#status option:selected").text());
+      // $('#' + user.user_id).html($("#status option:selected").text());
       Materialize.toast(res.message, 4000)
     })
   }

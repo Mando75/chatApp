@@ -50,6 +50,18 @@
         </div>
     </div>
 
+<div id="modalAddFriend" class="modal">
+    <div class="modal-content">
+        <h4 id="friendHead">Add a Friend</h4>
+        <h5 id="friendSub"></h5>
+        <p id="friendMessage"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="friendModalAgree" class="modal-action waves-effect waves-green btn-flat" data-user="" onclick="addFriend(this.dataset.user)">Agree</a>
+        <a href="#!" id="friendModalClose" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
 <% include ../partials/footer.ejs %>
 <script src="/javascripts/chat.js"></script>
 <script src="socket.io/socket.io.js"></script>
