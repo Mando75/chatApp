@@ -40,7 +40,7 @@ function removeFriend(rel_id) {
     $.post('friends/removeFriend', {
       rel_id: rel_id
     }, function (data, status) {
-      console.log(data);
+      // console.log(data);
       getFriends();
     });
   }
