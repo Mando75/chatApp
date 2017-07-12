@@ -72,7 +72,7 @@ router.get('/getFriends', (req, res, next) => {
 
 
 router.get('/invite', (req, res, next) => {
-  const sendgrid_api_key = require('../modules/sendgridkey');
+  const sendgrid_api_key = process.env.SENDGRID_API_KEY || require('../modules/sendgridkey');
   var helper = require('sendgrid').mail;
   var fromEmail = new helper.Email('donotreply@chat-material.com');
   var toEmail = new helper.Email('mando0975@gmail.com');
