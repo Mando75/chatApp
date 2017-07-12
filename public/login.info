@@ -1,0 +1,13 @@
+username:  chucknorris
+email: chuck@norris.net
+password: chucknorris
+
+<% //if(typeof user.user_id != 'undefined' ) { %>
+
+<%= //typeof user.username !='undefined' ? name : 'not logged in' %>
+
+<%= //typeof user.email !='undefined' ? email : 'not logged in' %>
+
+ <%} //else { %>
+
+ <% //} %>
