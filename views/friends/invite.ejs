@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/head.ejs %>
+    </head>
+    <body>
+        <% include ../partials/nav.ejs %>
+            <div class="container">
+                <div class="row">
+                    <div class="card large">
+                        <div class="row">
+                            <div class="col s12 center">
+                                <h4 class="header">Invite Your Friends!</h4>
+                                <br><br>
+                                <h5 class="header">Do you like Material Chat? Invite your friends to join the conversation!</h5>
+                                <br>
+                                <h6 class="header">Just enter your friend's name and email below, and we'll send them a link!</h6>
+                            </div>
+                        </div>
+                        <div class="row" id="createForm">
+                            <div class="col s12">
+                                <div class="row">
+                                    <div class="col s12 m6 input-field">
+                                        <input type="text" name="name" id="name" class="validate">
+                                        <label for="name">Your friend's name</label>
+                                    </div>
+                                    <div class="col s12 m6 input-field">
+                                        <input type="email" name="email" id="email" class="validate">
+                                        <label for="email">Your friend's email</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12 center">
+                                        <a role="button" class="btn btn-large waves-effect purple" type="button" id="sendInvite" onclick="sendInvite()">Send Invite!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% include ../partials/footer.ejs %>
+        <div id="modalInvite" class="modal">
+            <div class="modal-content">
+                <h4 class="header" id="head"></h4>
+                <h6 class="header" id="subheader"></h6>
+                <p id="message"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
+
+
+        <script src="/javascripts/invite.js" type="application/javascript" rel="script"></script>
+    </body>
+</html>

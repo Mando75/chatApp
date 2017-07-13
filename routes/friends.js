@@ -70,30 +70,45 @@ router.get('/getFriends', (req, res, next) => {
   }
 });
 
-
 router.get('/invite', (req, res, next) => {
-  const sendgrid_api_key = process.env.SENDGRID_API_KEY || require('../modules/sendgridkey');
-  var helper = require('sendgrid').mail;
-  var fromEmail = new helper.Email('donotreply@chat-material.com');
-  var toEmail = new helper.Email('mando0975@gmail.com');
-  var subject = 'Sending with SendGrid is Fun';
-  var content = new helper.Content('text/plain', 'and easy to do anywhere, even with Node.js');
-  var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+  sess = req.session;
+  if(sess.user) {
+    res.render('friends/invite');
+  } else {
+    res.render('account/login');
+  }
 
-  var sg = require('sendgrid')(sendgrid_api_key);
-  var request = sg.emptyRequest({
-    method: 'POST',
-    path: '/v3/mail/send',
-    body: mail.toJSON()
-  });
+});
 
-  sg.API(request, function (error, response) {
-    if (error) {
-      console.log('Error response received');
-    }
-    console.log(response.statusCode);
-    console.log(response.body);
-    console.log(response.headers);
-  });
+router.post('/invite', (req, res, next) => {
+  sess = req.session;
+  if(sess.user) {
+    let inviteFriend = require('../modules/friends/inviteFriend');
+    let invite = {
+      name: req.sanitizeBody('name').escape(),
+      email: req.sanitizeBody('email').escape(),
+      user: sess.user.username
+    };
+    console.log(invite);
+    inviteFriend(invite, (err) => {
+      if(err) {
+        console.log(err);
+        res.json({
+          header: 'Whoops!',
+          subheader: 'Something went wrong!',
+          message: 'Please refresh and try again...'
+        });
+        res.end();
+      } else {
+        res.json({
+          header: 'Success!',
+          subheader: 'Invitation sent!',
+          message: 'Your friend will receive an email shortly :)'
+        });
+        res.end();
+      }
+    });
+  }
+
 });
 module.exports = router;
