@@ -73,7 +73,9 @@ router.get('/getFriends', (req, res, next) => {
 router.get('/invite', (req, res, next) => {
   sess = req.session;
   if(sess.user) {
-    res.render('friends/invite');
+    res.render('friends/invite', {
+      user: sess.user
+    });
   } else {
     res.render('account/login');
   }
