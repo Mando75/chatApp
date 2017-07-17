@@ -3,7 +3,7 @@
  */
 function sendInvite() {
     var name = $('#name').val();
-    var email = $('#email').val();
+    var email = $('#emailToSend').val();
     if(validEmail(email)) {
       $.post('/friends/invite', {
         name: name,
