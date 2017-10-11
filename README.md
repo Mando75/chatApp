@@ -1,4 +1,4 @@
 # chatApp
 A chat app built for CS313
 
-Hosted on Heroku-> (chat-material.herokuapp.com)[chat-material.herokuapp.com]
+Hosted on Heroku-> <a href='chat-material.herokuapp.com'>chat-material.herokuapp.com</a>
